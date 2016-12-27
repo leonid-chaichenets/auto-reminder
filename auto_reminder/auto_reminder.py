@@ -4,12 +4,13 @@
 u'''Reminder for cleaning duties.'''
 
 import datetime
+from email.mime.text import MIMEText
 
 # Flatmates and their addresses
-Fs = [('Roomie2', 'First2 Last2', 'email2@example.com'),
-	('Roomie3' 'First3 Last3', 'email3@example.com'),
-	('Roomie1', 'First1 Last1',
-		'email1@example.com')]
+Fs = [('Roomie2', 'First2 Last2 <email2@example.com>'),
+	('Roomie3' 'First3 Last3 <email3@example.com>'),
+	('Roomie1',
+	'First1 Last1 <email1@example.com>')]
 
 # The date on which the agreement on cleaning duties had been fixed.
 d_0 = datetime.date(2016,11,17)
@@ -78,7 +79,7 @@ if __name__ == "__main__":
 	signature = '\n-- \n' + 'Kind regards\n' + 'Your autoreminder'
 	mail_body = opening + text + duties_list + signature
 
-	print(mail_body)
-#	print("Week", "1st", "2nd", "3d", "4th", sep='\t')
-#	for i in range(52):
-#		print(i, i % 1, i % 2, i % 4, i % 5, sep='\t')
+	msg = MIMEText(mail_body, _charset='utf-8')
+	msg['Subject'] = 'Cleaning duties reminder for ISO week %s.' % d_1.isocalendar()[1]
+	msg['To'] = Fs[f][1]
+	print(msg)
