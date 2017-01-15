@@ -4,6 +4,7 @@
 u'''Reminder for cleaning duties.'''
 
 import datetime
+import locale
 from email.mime.text import MIMEText
 
 # Flatmates and their addresses
@@ -46,8 +47,21 @@ Ds4 = [['Clean the toilet seat.'],
 
 if __name__ == "__main__":
 
+	# Enforce locale.
+	locale.setlocale(locale.LC_TIME, "de_DE.utf8")
+
 	# Current date.
 	d_1 = datetime.date.today()
+
+	# ISO week number.
+	iso_week = d_1.isocalendar()[1]
+
+	# Dates of Monday and Sunday of the current week.
+	dow = d_1.weekday()
+	mon = d_1 + datetime.timedelta(days=-dow)
+	mon_str = mon.strftime('%x')
+	sun = d_1 + datetime.timedelta(days=6-dow)
+	sun_str = sun.strftime('%x')
 
 	# Number of weeks passed.
 	w = (d_1 - d_0).days // 7
@@ -79,7 +93,9 @@ if __name__ == "__main__":
 	signature = '\n-- \n' + 'Kind regards\n' + 'Your autoreminder'
 	mail_body = opening + text + duties_list + signature
 
-	msg = MIMEText(mail_body, _charset='utf-8')
-	msg['Subject'] = 'Cleaning duties reminder for ISO week %s.' % d_1.isocalendar()[1]
+	msg = MIMEText(mail_body)
+	msg['Subject'] = \
+		'Cleaning duties reminder for ISO week %s (%s - %s).' \
+	        % (iso_week, mon_str, sun_str)
 	msg['To'] = Fs[f][1]
 	print(msg)
