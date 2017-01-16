@@ -8,13 +8,13 @@ import locale
 from email.mime.text import MIMEText
 
 # Flatmates and their addresses
-Fs = [('Roomie2', 'First2 Last2 <email2@example.com>'),
-	('Roomie3' 'First3 Last3 <email3@example.com>'),
-	('Roomie1',
-	'First1 Last1 <email1@example.com>')]
+Fs = [('Roomie1',
+	'First1 Last1 <email1@example.com>'),
+	('Roomie2', 'First2 Last2 <email2@example.com>'),
+	('Roomie3', 'First3 Last3 <email3@example.com>')]
 
 # The date on which the agreement on cleaning duties had been fixed.
-d_0 = datetime.date(2016,11,17)
+d_0 = datetime.date(2017,1,9)
 
 # Each of the N flatmates is on duty every N weeks (and has # N-1 weeks
 # to recover from the cleaning stress :)). Cleaning duties repeat
@@ -93,9 +93,11 @@ if __name__ == "__main__":
 	signature = '\n-- \n' + 'Kind regards\n' + 'Your autoreminder'
 	mail_body = opening + text + duties_list + signature
 
+	# Add headers.
 	msg = MIMEText(mail_body)
 	msg['Subject'] = \
 		'Cleaning duties reminder for ISO week %s (%s - %s).' \
 	        % (iso_week, mon_str, sun_str)
 	msg['To'] = Fs[f][1]
+	
 	print(msg)
