@@ -42,7 +42,8 @@ Ds2 = [['Wipe the floors in the common areas.',
 # M = 4
 Ds4 = [['Clean the toilet seat.'],
 	['Clean the shower (remove fungus).'],
-	['Clean the mirrors and wipe the furniture in the kitchen'],
+	['Clean the mirrors and wipe the furniture in the common ' \
+		'areas.'],
 	['Clean exhaust hood and wipe the tiled wall in the kitchen.']]
 
 if __name__ == "__main__":
