@@ -7,6 +7,9 @@ import datetime
 import locale
 from email.mime.text import MIMEText
 
+# Version
+ver = 20170123-1
+
 # Reminder’s address.
 me = 'Autoreminder <email@example.com>'
 
