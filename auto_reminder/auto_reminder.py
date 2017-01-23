@@ -7,7 +7,10 @@ import datetime
 import locale
 from email.mime.text import MIMEText
 
-# Flatmates and their addresses
+# Reminder’s address.
+me = 'Autoreminder <email@example.com>'
+
+# Flatmates and their addresses.
 Fs = [('Roomie1',
 	'First1 Last1 <email1@example.com>'),
 	('Roomie2', 'First2 Last2 <email2@example.com>'),
@@ -100,5 +103,7 @@ if __name__ == "__main__":
 		'Cleaning duties reminder for ISO week %s (%s - %s).' \
 	        % (iso_week, mon_str, sun_str)
 	msg['To'] = Fs[f][1]
+	msg['From'] = me
+	msg['Bcc'] = me
 	
 	print(msg)
