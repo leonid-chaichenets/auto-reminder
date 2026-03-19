@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 
 u'''Reminder for cleaning duties.'''
 
